@@ -63,17 +63,17 @@ main {
 }
 
 .content {
-  width: min(30vw,600px);
+  width: min(33.5vw,600px);
   position: absolute;
   top: 50%;
-  left: 12rem;
+  left: 10%;
   transform: translateY(-50%);
   font-size: 0.85rem;
   font-weight: 400;
   font-family:monospace;
   color: black;
   display: none;
-  padding: 50px 40px 40px 40px;
+  padding: 4.5% 3.5% 3.5% 3.5%;
   background-color: #fff;
   backdrop-filter: blur(5px);
   border: 2px solid black;
@@ -234,6 +234,13 @@ main {
   flex-direction: row;
 }
 
+@media (max-width: 1100px) {
+  .blog-actions{
+    display: flex;
+    flex-direction: column !important;
+  }
+}
+
 .blog-btn {
   display: block; 
   padding: 15px 40px;  
@@ -301,7 +308,7 @@ a{
 }
 
 .form-container {
-  width: 50%;
+  width: 30%;
   margin: auto;
   padding: 20px;
   border: 2px solid rgb(0, 0, 0);
