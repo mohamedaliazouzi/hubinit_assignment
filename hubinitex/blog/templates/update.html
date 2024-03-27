@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Blog Item</title>
+</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<body>
+    <div class="form-container">
+        <h1>Update Blog Item</h1>
+        <br>
+        <form action="{% url 'uprec' blog.id %}" method="post">
+            {% csrf_token %}
+            <label for="id_blog_title">Blog Title:</label><br>
+            <input type="text" id="id_blog_title" name="blog_title" value="{{blog.blog_title}}" maxlength="50" required><br><br>
+
+            <label for="id_blog_text">Blog Text:</label><br>
+            <textarea id="id_blog_text" name="blog_text" rows="10" cols="50" required>{{blog.blog_text}}</textarea><br><br>
+
+            <label for="id_blog_status">Blog Status:</label><br>
+            <select id="id_blog_status" name="blog_status" required>
+                <option value="Active" {% if blog.blog_status == 'Active' %} selected {% endif %}>Active</option>
+                <option value="Draft" {% if blog.blog_status == 'Draft' %} selected {% endif %}>Draft</option>
+            </select><br><br>            
+
+            <button type="submit" class="submit-btn">Update</button>
+        </form>
+    </div>
+</body>
+
+</html>

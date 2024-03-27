@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Blog Item</title>
+</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<body>
+
+    {% block content %}
+            {% if q %}
+                {% for b in blogs %}
+                    <div>
+                        <h2 class='title'>{{ b.blog_title }}</h2>
+                        <br>
+                        <p class='author'>Author: <span style="font-weight: 600;">{{ b.author_name }}</span></p>
+                        <p class='status'>Status: <span style="font-weight: 600;">{{ b.blog_status }}</span></p>
+                        <br>
+                        <p class='description'>{{ b.blog_text }}</p>
+                        <br>
+                        <a href="/blog"><button class='blog-btn back-btn'>Back</button></a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+    {% endblock %}
+
+</body>
+</html>
