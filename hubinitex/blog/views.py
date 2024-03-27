@@ -4,6 +4,10 @@ from .models import Blog
 # Create your views here.
 
 
+def redirect_to_blog(request):
+    return redirect('blog')  # Redirect to the 'blog' named URL pattern
+
+
 def blog(request):
     items = Blog.objects.all()
     return render(request, "blog.html", {"blogs": items})
@@ -56,7 +60,3 @@ def search(request):
         return render(request, 'search.html', {'q': q, 'blogs': blogs})
     else:
         return render(request, 'search.html', {})
-
-
-def back_redirect(request):
-    return redirect('blog/')
