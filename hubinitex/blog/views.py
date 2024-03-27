@@ -56,7 +56,3 @@ def search(request):
         return render(request, 'search.html', {'q': q, 'blogs': blogs})
     else:
         return render(request, 'search.html', {})
-
-
-def back_redirect(request):
-    return redirect('blog/')
