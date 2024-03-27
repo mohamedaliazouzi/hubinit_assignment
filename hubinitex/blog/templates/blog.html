@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>
+    {% block title %}
+    CodePen - Responsive Image Carousel ( Animation )
+    {% endblock %}
+  </title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <form class="search-container" method="POST" action="{% url 'search' %}">
+      {% csrf_token %}
+      <input class="search-input" type="text" name="q" placeholder="Search...">
+      <button class="search-image" type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </nav>
+
+  <main>
+    <!-- Display search query if available -->
+    {% if query %}
+    <h3>Search Results for: "{{ query }}"</h3>
+    {% endif %}
+
+    <ul class='slider'>
+      {% for blog in blogs %}
+      {% cycle 'background1' 'background2' 'background3' as bg %}
+      <li class='item {{ bg }}'>
+        <div class='content'>
+          <h2 class='title'>{{ blog.blog_title }}</h2>
+          <br>
+          <p class='author'>Author: <span style="font-weight: 600;">{{ blog.author_name }}</span></p>
+          <p class='status'>Status: <span style="font-weight: 600;">{{ blog.blog_status }}</span></p>
+          <br>
+          <p class='description'>{{ blog.blog_text }}</p>
+          <br>
+          <!-- Modify and Delete Buttons -->
+          <div class="blog-actions">
+            <a href="update/{{blog.id}}"><button class="modify-btn blog-btn">Modify</button></a>
+            <a href="delete/{{blog.id}}"><button class="delete-btn blog-btn">Delete</button></a>
+          </div>
+        </div>
+      </li>
+      {% empty %}
+      <li>No blogs found.</li>
+      {% endfor %}
+    </ul>
+    <!-- Read More Button -->
+    <nav class='nav'>
+      <!-- Add New Blog Button -->
+      <a class="add-new-blog" href="{% url 'add' %}"><button class="add-btn blog-btn">Add New Blog</button></a>
+      <ion-icon class='btn prev' name="arrow-back-outline"></ion-icon>
+      <ion-icon class='btn next' name="arrow-forward-outline"></ion-icon>
+    </nav>
+  </main>  
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
